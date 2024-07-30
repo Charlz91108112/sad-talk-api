@@ -184,7 +184,11 @@ async def sadtalker_create(item: Item):
     
     result = animate_from_coeff.generate(data, save_dir, PIC_PATH, crop_info, \
                                 enhancer=ENHANCER, background_enhancer=BACKGROUND_ENHANCER, preprocess=PREPROCESS, img_size=SIZE)
-    shutil.move(result, save_dir+'.mp4')
+    try:
+        shutil.move(result, save_dir+'.mp4')
+    except:
+        print(f"RESULT: {result}, SAVE_DIR: {save_dir}.mp4")
+        print("Issue in moving the video")
     print('The generated video is named:', save_dir+'.mp4')
 
     if not VERBOSE:
